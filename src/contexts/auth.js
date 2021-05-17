@@ -5,11 +5,9 @@ import authReducer from '../reducers/auth';
 const AuthStateContext = React.createContext();
 const AuthDispatchContext = React.createContext();
 
-const token = JSON.parse(localStorage.getItem('authToken'));
 const email = JSON.parse(localStorage.getItem('authEmail'));
 const initialState = {
-  isLoggedIn: !!token,
-  authToken: token ? token : null,
+  isLoggedIn: JSON.parse(localStorage.getItem('isLoggedIn')),
   authEmail: email ? email : null,
 };
 
