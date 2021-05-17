@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import {
   Flex,
   Box,
@@ -52,11 +53,11 @@ const Login = ({ history }) => {
     try {
       setLoading(true);
       const {
-        data: { auth_token, user, is_admin },
-      } = await authenticationApi.login({ user: { email, password } });
-      authDispatch({ type: 'LOGIN', payload: { auth_token, email, is_admin } });
+        data: { user, is_admin },
+      } = await authenticationApi.login({ user: { email, password }} );
+      authDispatch({ type: 'LOGIN', payload: { email, is_admin } });
       userDispatch({ type: 'SET_USER', payload: { user } });
-      setAuthHeaders();
+      // setAuthHeaders();
       history.push('/');
       toast({
         description: 'Logged in successfully.',
