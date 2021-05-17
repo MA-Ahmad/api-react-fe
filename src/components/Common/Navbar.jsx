@@ -19,7 +19,6 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useAuthDispatch } from '../../contexts/auth';
 import authenticationApi from '../../apis/authentication';
-import { resetAuthTokens } from '../../apis/axios';
 import { useUserState } from '../../contexts/user';
 import { Link } from 'react-router-dom';
 
@@ -50,7 +49,6 @@ const Navbar = () => {
     try {
       await authenticationApi.logout();
       authDispatch({ type: 'LOGOUT' });
-      resetAuthTokens();
       window.location.href = '/';
     } catch (error) {
       //   Toastr.error(error);
