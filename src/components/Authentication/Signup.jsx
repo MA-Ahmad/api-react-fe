@@ -16,7 +16,6 @@ import {
   FormErrorMessage,
   useToast
 } from '@chakra-ui/react';
-import { setAuthHeaders } from '../../apis/axios';
 import authenticationApi from '../../apis/authentication';
 import { useAuthDispatch } from '../../contexts/auth';
 import { useUserDispatch } from '../../contexts/user';
@@ -45,11 +44,6 @@ const Signup = ({ history }) => {
     passwordConfirmation: '',
   });
 
-  // const [email, setEmail] = useState('');
-  // const [firstName, setFirstName] = useState('');
-  // const [lastName, setLastName] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [loading, setLoading] = useState(false);
   const toast = useToast();
   const authDispatch = useAuthDispatch();
@@ -60,7 +54,7 @@ const Signup = ({ history }) => {
     try {
       setLoading(true);
       const {
-        data: { user, auth_token },
+        data: { user },
       } = await authenticationApi.signup({
         user: {
           email,
@@ -72,7 +66,7 @@ const Signup = ({ history }) => {
       });
       authDispatch({
         type: 'LOGIN',
-        payload: { auth_token, email, is_admin: false },
+        payload: { email, is_admin: false },
       });
       userDispatch({ type: 'SET_USER', payload: { user } });
       history.push('/');
@@ -83,7 +77,6 @@ const Signup = ({ history }) => {
         isClosable: true,
       });
     } catch (error) {
-      // alert(error.response.data.error);
       toast({
         description: error.response.data.error,
         status: 'error',
