@@ -73,8 +73,9 @@ export default function CallToActionWithVideo() {
               size={'lg'}
               fontWeight={'normal'}
               px={6}
-              leftIcon={<PlayIcon h={4} w={4} color={'gray.300'} />}>
-              How It Works
+              as={Link}
+              to="/signup">
+              Sign up
             </Button>
           </Stack>
         </Stack>
