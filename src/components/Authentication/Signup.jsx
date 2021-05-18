@@ -14,7 +14,7 @@ import {
   useColorModeValue,
   HStack,
   FormErrorMessage,
-  useToast
+  useToast,
 } from '@chakra-ui/react';
 import authenticationApi from '../../apis/authentication';
 import { useAuthDispatch } from '../../contexts/auth';
@@ -50,7 +50,13 @@ const Signup = ({ history }) => {
   const userDispatch = useUserDispatch();
 
   const handleSubmitExternally = async values => {
-    const { email, firstName, lastName, password, passwordConfirmation } = values;
+    const {
+      email,
+      firstName,
+      lastName,
+      password,
+      passwordConfirmation,
+    } = values;
     try {
       setLoading(true);
       const {
@@ -120,31 +126,6 @@ const Signup = ({ history }) => {
                   <Stack spacing={3}>
                     <Box>
                       <Field
-                        name="email"
-                        validate={validateEmail}
-                        width={'100%'}
-                      >
-                        {({ field, form }) => (
-                          <FormControl
-                            isInvalid={form.errors.email && form.touched.email}
-                          >
-                            <FormLabel htmlFor="email">Email *</FormLabel>
-                            <Input
-                              {...field}
-                              id="email"
-                              placeholder="Email"
-                              value={values.email}
-                              onChange={handleChange}
-                            />
-                            <FormErrorMessage mt={0}>
-                              {form.errors.email}
-                            </FormErrorMessage>
-                          </FormControl>
-                        )}
-                      </Field>
-                    </Box>
-                    <Box>
-                      <Field
                         name="firstName"
                         validate={validateName}
                         width={'100%'}
@@ -196,6 +177,31 @@ const Signup = ({ history }) => {
                             />
                             <FormErrorMessage mt={0}>
                               {form.errors.lastName}
+                            </FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+                    </Box>
+                    <Box>
+                      <Field
+                        name="email"
+                        validate={validateEmail}
+                        width={'100%'}
+                      >
+                        {({ field, form }) => (
+                          <FormControl
+                            isInvalid={form.errors.email && form.touched.email}
+                          >
+                            <FormLabel htmlFor="email">Email *</FormLabel>
+                            <Input
+                              {...field}
+                              id="email"
+                              placeholder="Email"
+                              value={values.email}
+                              onChange={handleChange}
+                            />
+                            <FormErrorMessage mt={0}>
+                              {form.errors.email}
                             </FormErrorMessage>
                           </FormControl>
                         )}
@@ -263,7 +269,7 @@ const Signup = ({ history }) => {
 
                     <Stack spacing={10}>
                       <Button
-                      isLoading={loading}
+                        isLoading={loading}
                         bg={'blue.400'}
                         color={'white'}
                         _hover={{
